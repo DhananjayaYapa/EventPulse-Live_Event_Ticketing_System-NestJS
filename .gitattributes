@@ -1,0 +1,8 @@
+# Shell scripts run inside Linux containers. If git checks them out with CRLF
+# on Windows, bash fails with "\r: command not found".
+*.sh text eol=lf
+
+# Same reason: these are read by tools inside containers.
+Dockerfile text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf

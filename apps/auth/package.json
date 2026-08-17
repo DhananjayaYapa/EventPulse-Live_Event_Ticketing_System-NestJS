@@ -1,0 +1,7 @@
+{
+  "name": "@eventpulse/auth",
+  "version": "1.0.0",
+  "description": "Registration, login, tokens and roles. PostgreSQL + Prisma.",
+  "private": true,
+  "type": "module"
+}

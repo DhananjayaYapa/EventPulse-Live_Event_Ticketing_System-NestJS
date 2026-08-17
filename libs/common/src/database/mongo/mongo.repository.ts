@@ -12,7 +12,7 @@ export abstract class MongoRepository<TDocument extends MongoDocument> {
       ...document,
       _id: new Types.ObjectId(),
     });
-    return (await createdDocument.save()).toJSON() as unknown as TDocument;
+    return (await createdDocument.save()).toJSON();
   }
 
   async findOne(filterQuery: QueryFilter<TDocument>): Promise<TDocument> {
@@ -53,6 +53,15 @@ export abstract class MongoRepository<TDocument extends MongoDocument> {
   async findOneAndDelete(
     filterQuery: QueryFilter<TDocument>,
   ): Promise<TDocument> {
-    return this.model.findOneAndDelete(filterQuery).lean<TDocument>(true);
+    const document = await this.model
+      .findOneAndDelete(filterQuery)
+      .lean<TDocument>(true);
+
+    if (!document) {
+      this.logger.warn('Document was not found with filterQuery', filterQuery);
+      throw new NotFoundException('Document was not found');
+    }
+
+    return document;
   }
 }

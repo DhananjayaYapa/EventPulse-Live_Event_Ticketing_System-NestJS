@@ -4,9 +4,9 @@ import {
   EntityManager,
   FindOptionsRelations,
   FindOptionsWhere,
+  QueryDeepPartialEntity,
   Repository,
 } from 'typeorm';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 export abstract class TypeOrmRepository<T extends TypeOrmEntity<T>> {
   protected abstract readonly logger: Logger;
